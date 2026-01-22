@@ -1,30 +1,49 @@
 import streamlit as st
 
-def render_navbar():
-    st.markdown("""
-        <style>
-        .brand {
-            font-size: 26px;
-            font-weight: 800;
-            background: linear-gradient(90deg, #6B4C7A, #E8927C);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        </style>
-    """, unsafe_allow_html=True)
+st.set_page_config(page_title="HerNetwork", layout="wide")
 
-    st.sidebar.markdown("### ✨ HerNetwork")
+# -----------------------------
+# SESSION STATE (Auth)
+# -----------------------------
+if "user" not in st.session_state:
+    st.session_state.user = None
 
-    if st.session_state.get("user"):
-        user = st.session_state["user"]
+# -----------------------------
+# SIDEBAR = NAVBAR
+# -----------------------------
+with st.sidebar:
+    st.title("✨ HerNetwork")
 
-        st.sidebar.markdown(f"""
-        **👤 {user.get("name", "User")}**  
-        _{user.get("email", "")}_
-        """)
+    if st.session_state.user:
+        st.write(f"👤 {st.session_state.user['name']}")
 
-        if st.sidebar.button("🚪 Sign Out"):
-            st.session_state.clear()
+        menu = st.radio(
+            "Navigation",
+            ["Home", "Find Mentors", "Find Clients", "Discover"]
+        )
+
+        if st.button("🚪 Sign Out"):
+            st.session_state.user = None
             st.experimental_rerun()
     else:
-        st.sidebar.info("Not signed in")
+        menu = "Home"
+        if st.button("🔐 Sign In"):
+            st.session_state.user = {"name": "Demo User"}
+            st.experimental_rerun()
+
+# -----------------------------
+# MAIN CONTENT (children)
+# -----------------------------
+st.markdown("## Page Content")
+
+if menu == "Home":
+    st.write("🏠 Home Page")
+
+elif menu == "Find Mentors":
+    st.write("🏆 Find Mentors Page")
+
+elif menu == "Find Clients":
+    st.write("🎯 Find Clients Page")
+
+elif menu == "Discover":
+    st.write("🧭 Discover Page")
