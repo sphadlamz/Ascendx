@@ -1,10 +1,10 @@
+import streamlit as st
+
 # --------------------------------------------------
 # NAVIGATION STATE
 # --------------------------------------------------
 if "page" not in st.session_state:
     st.session_state.page = "home"
-
-import streamlit as st
 
 # --------------------------------------------------
 # PAGE CONFIG
