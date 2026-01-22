@@ -2,20 +2,34 @@ import streamlit as st
 
 st.set_page_config(
     page_title="AscendLink",
-    layout="mobile"
+    layout="centered"
 )
 
 st.title("AscendLink")
-st.subheader("Youth & Women Enterprise Empowerment Platform")
 
-st.write("""
-Connecting entrepreneurs, mentors, and customers
-using Huawei Cloud.
-""")
-
-role = st.selectbox(
-    "Who are you?",
-    ["Entrepreneur", "Mentor", "Customer"]
+menu = st.radio(
+    "Menu",
+    ["Home", "Register", "Find Mentors", "Training"]
 )
 
-st.success(f"Welcome, {role}!")
+if menu == "Home":
+    st.subheader("Empowering Youth & Women Entrepreneurs")
+    st.write("Built on Huawei Cloud")
+
+elif menu == "Register":
+    st.subheader("Register")
+
+    name = st.text_input("Full Name")
+    phone = st.text_input("Phone Number")
+    role = st.selectbox("Role", ["Entrepreneur", "Mentor", "Customer"])
+
+    if st.button("Register"):
+        st.success("Registered successfully (API coming next)")
+
+elif menu == "Find Mentors":
+    st.subheader("Nearby Mentors")
+    st.info("Map view will appear here (Huawei MapKit)")
+
+elif menu == "Training":
+    st.subheader("Training Videos")
+    st.video("https://www.w3schools.com/html/mov_bbb.mp4")
