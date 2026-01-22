@@ -1,62 +1,141 @@
 import streamlit as st
 
-st.set_page_config(page_title="HerNetwork", layout="wide")
+# --------------------------------------------------
+# PAGE CONFIG
+# --------------------------------------------------
+st.set_page_config(
+    page_title="AscendX",
+    layout="wide"
+)
 
-# -----------------------------
-# SESSION STATE (Auth)
-# -----------------------------
-if "user" not in st.session_state:
-    st.session_state.user = None
+# --------------------------------------------------
+# GLOBAL STYLES (Base44-inspired)
+# --------------------------------------------------
+st.markdown("""
+<style>
+/* Page background */
+.stApp {
+    background-color: #FAF7F5;
+}
 
-# -----------------------------
-# SIDEBAR = NAVBAR
-# -----------------------------
-with st.sidebar:
-    st.title("✨ HerNetwork")
+/* Hero badge */
+.hero-badge {
+    display: inline-block;
+    padding: 8px 18px;
+    background: rgba(107, 78, 138, 0.12);
+    color: #6B4E8A;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
 
-    if st.session_state.user:
-        st.write(f"👤 {st.session_state.user['name']}")
+/* Hero title */
+.hero-title {
+    font-size: 64px;
+    font-weight: 800;
+    line-height: 1.1;
+    color: #1F2937;
+}
 
-        menu = st.radio(
-            "Navigation",
-            ["Home", "Find Mentors", "Find Clients", "Discover"]
-        )
+.hero-title .mentor {
+    color: #6B4E8A;
+}
 
-        if st.button("🚪 Sign Out"):
-            st.session_state.user = None
-            st.experimental_rerun()
-    else:
-        menu = "Home"
-        if st.button("🔐 Sign In"):
-            st.session_state.user = {"name": "Demo User"}
-            st.experimental_rerun()
+.hero-title .grow {
+    color: #F2A07B;
+}
 
-# -----------------------------
-# MAIN CONTENT (children)
-# -----------------------------
-st.markdown("## Page Content")
+/* Hero text */
+.hero-text {
+    font-size: 18px;
+    color: #6B7280;
+    max-width: 720px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
 
-if menu == "Home":
-    st.write("🏠 Home Page")
+/* Buttons */
+.primary-btn button {
+    background-color: #6B4E8A !important;
+    color: white !important;
+    border-radius: 14px;
+    padding: 14px 28px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+}
 
-elif menu == "Find Mentors":
-    st.subheader("🏆 Find Mentors")
+.secondary-btn button {
+    background-color: transparent !important;
+    color: #F2A07B !important;
+    border: 2px solid #F2A07B !important;
+    border-radius: 14px;
+    padding: 14px 28px;
+    font-size: 16px;
+    font-weight: 600;
+}
 
-    mentors = [
-        {"name": "Nandi Mokoena", "location": "Soweto"},
-        {"name": "Thabo Khumalo", "location": "Durban"}
-    ]
+/* Button spacing fix */
+div.stButton > button {
+    width: 100%;
+}
+</style>
+""", unsafe_allow_html=True)
 
-    for mentor in mentors:
-        st.markdown(f"### 👤 {mentor['name']}")
-        st.write(f"📍 {mentor['location']}")
+# --------------------------------------------------
+# HERO SECTION (Centered)
+# --------------------------------------------------
+left, center, right = st.columns([1, 2, 1])
 
-        if st.button(f"Book {mentor['name']}", key=mentor["name"]):
-            st.success("Session booked")
+with center:
 
+    # Badge
+    st.markdown(
+        '<div class="hero-badge">✨ Empowering Women in Business</div>',
+        unsafe_allow_html=True
+    )
 
-elif menu == "Find Clients":
-    st.write("🎯 Find Clients Page")
+    # Title
+    st.markdown(
+        """
+        <div class="hero-title">
+            Connect. <span class="mentor">Mentor.</span><br>
+            <span class="grow">Grow Together.</span>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
-elif menu == "Discover":
-    st.write("🧭 Discover Page")
+    # Description
+    st.markdown(
+        """
+        <div class="hero-text">
+            Find mentors who share your business interests, discover clients near you,
+            and build meaningful connections with fellow women entrepreneurs.
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # CTA Buttons
+    btn1, btn2 = st.columns(2)
+
+    with btn1:
+        st.markdown('<div class="primary-btn">', unsafe_allow_html=True)
+        st.button("Find a Mentor")
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    with btn2:
+        st.markdown('<div class="secondary-btn">', unsafe_allow_html=True)
+        st.button("Find Clients")
+        st.markdown('</div>', unsafe_allow_html=True)
+
+# --------------------------------------------------
+# FOOTER (Optional, clean)
+# --------------------------------------------------
+st.markdown("<br><br>", unsafe_allow_html=True)
+st.markdown(
+    "<center style='color:#9CA3AF;'>Built by students • Powered by Huawei Cloud</center>",
+    unsafe_allow_html=True
+)
