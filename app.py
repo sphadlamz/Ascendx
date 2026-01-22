@@ -40,7 +40,20 @@ if menu == "Home":
     st.write("🏠 Home Page")
 
 elif menu == "Find Mentors":
-    st.write("🏆 Find Mentors Page")
+    st.subheader("🏆 Find Mentors")
+
+    mentors = [
+        {"name": "Nandi Mokoena", "location": "Soweto"},
+        {"name": "Thabo Khumalo", "location": "Durban"}
+    ]
+
+    for mentor in mentors:
+        st.markdown(f"### 👤 {mentor['name']}")
+        st.write(f"📍 {mentor['location']}")
+
+        if st.button(f"Book {mentor['name']}", key=mentor["name"]):
+            st.success("Session booked")
+
 
 elif menu == "Find Clients":
     st.write("🎯 Find Clients Page")
