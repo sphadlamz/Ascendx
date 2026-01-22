@@ -5,7 +5,7 @@ st.set_page_config(
     layout="centered"
 )
 
-st.title("AscendLink")
+st.title("AscendX")
 
 menu = st.radio(
     "Menu",
