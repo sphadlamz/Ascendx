@@ -1,150 +1,187 @@
 import streamlit as st
 
 # --------------------------------------------------
-# NAVIGATION STATE
+# PAGE CONFIG
+# --------------------------------------------------
+st.set_page_config(
+    page_title="AscendX",
+    layout="centered"
+)
+
+# --------------------------------------------------
+# NAVIGATION STATE (STEP 1)
 # --------------------------------------------------
 if "page" not in st.session_state:
     st.session_state.page = "home"
 
 # --------------------------------------------------
-# PAGE CONFIG
-# --------------------------------------------------
-st.set_page_config(
-    page_title="AscendX",
-    layout="wide"
-)
-
-# --------------------------------------------------
-# GLOBAL STYLES (Base44-inspired)
+# CUSTOM CSS (Base44-inspired styling)
 # --------------------------------------------------
 st.markdown("""
 <style>
-/* Page background */
-.stApp {
-    background-color: #FAF7F5;
+body {
+    background: #fafafa;
 }
 
-/* Hero badge */
-.hero-badge {
+.hero-pill {
     display: inline-block;
-    padding: 8px 18px;
-    background: rgba(107, 78, 138, 0.12);
-    color: #6B4E8A;
+    padding: 6px 14px;
     border-radius: 999px;
-    font-weight: 600;
+    background: #f1e9f6;
+    color: #6B4C7A;
     font-size: 14px;
-    margin-bottom: 30px;
+    font-weight: 500;
 }
 
-/* Hero title */
 .hero-title {
-    font-size: 64px;
+    font-size: 56px;
     font-weight: 800;
     line-height: 1.1;
-    color: #1F2937;
 }
 
-.hero-title .mentor {
-    color: #6B4E8A;
-}
+.hero-title span.connect { color: #111827; }
+.hero-title span.mentor { color: #6B4C7A; }
+.hero-title span.grow { color: #E8927C; }
 
-.hero-title .grow {
-    color: #F2A07B;
-}
-
-/* Hero text */
-.hero-text {
+.hero-subtitle {
     font-size: 18px;
-    color: #6B7280;
+    color: #4b5563;
     max-width: 720px;
-    margin-top: 20px;
-    margin-bottom: 40px;
+    margin: 20px auto;
 }
 
-/* Buttons */
 .primary-btn button {
-    background-color: #6B4E8A !important;
-    color: white !important;
-    border-radius: 14px;
-    padding: 14px 28px;
+    background: linear-gradient(to right, #6B4C7A, #8B6B9B);
+    color: white;
+    border-radius: 12px;
+    padding: 12px 28px;
     font-size: 16px;
-    font-weight: 600;
     border: none;
 }
 
 .secondary-btn button {
-    background-color: transparent !important;
-    color: #F2A07B !important;
-    border: 2px solid #F2A07B !important;
-    border-radius: 14px;
-    padding: 14px 28px;
+    background: white;
+    color: #E8927C;
+    border: 2px solid #E8927C;
+    border-radius: 12px;
+    padding: 12px 28px;
     font-size: 16px;
-    font-weight: 600;
 }
 
-/* Button spacing fix */
-div.stButton > button {
-    width: 100%;
+.card {
+    padding: 20px;
+    border-radius: 16px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 16px;
 }
 </style>
 """, unsafe_allow_html=True)
 
 # --------------------------------------------------
-# HERO SECTION (Centered)
+# HOME PAGE (STEP 2 & 3)
 # --------------------------------------------------
-left, center, right = st.columns([1, 2, 1])
+if st.session_state.page == "home":
 
-with center:
+    st.markdown("<div style='text-align:center'>", unsafe_allow_html=True)
 
-    # Badge
-    st.markdown(
-        '<div class="hero-badge">✨ Empowering Women in Business</div>',
-        unsafe_allow_html=True
-    )
+    st.markdown("<div class='hero-pill'>✨ Empowering Women in Business</div>", unsafe_allow_html=True)
 
-    # Title
-    st.markdown(
-        """
-        <div class="hero-title">
-            Connect. <span class="mentor">Mentor.</span><br>
-            <span class="grow">Grow Together.</span>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    st.markdown("""
+    <div class="hero-title">
+        <span class="connect">Connect.</span>
+        <span class="mentor"> Mentor.</span><br>
+        <span class="grow">Grow Together.</span>
+    </div>
+    """, unsafe_allow_html=True)
 
-    # Description
-    st.markdown(
-        """
-        <div class="hero-text">
-            Find mentors who share your business interests, discover clients near you,
-            and build meaningful connections with fellow women entrepreneurs.
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    st.markdown("""
+    <p class="hero-subtitle">
+        Find mentors who share your business interests, discover clients near you,
+        and build meaningful connections with fellow women entrepreneurs.
+    </p>
+    """, unsafe_allow_html=True)
 
-    # CTA Buttons
-btn1, btn2 = st.columns(2)
+    st.markdown("</div>", unsafe_allow_html=True)
 
-with btn1:
-    st.markdown('<div class="primary-btn">', unsafe_allow_html=True)
-    if st.button("Find a Mentor"):
-        st.session_state.page = "mentors"
-    st.markdown('</div>', unsafe_allow_html=True)
+    st.write("")
 
-with btn2:
-    st.markdown('<div class="secondary-btn">', unsafe_allow_html=True)
-    if st.button("Find Clients"):
-        st.session_state.page = "clients"
-    st.markdown('</div>', unsafe_allow_html=True)
+    # Buttons (STEP 2)
+    col1, col2 = st.columns(2)
 
+    with col1:
+        st.markdown('<div class="primary-btn">', unsafe_allow_html=True)
+        if st.button("Find a Mentor"):
+            st.session_state.page = "mentors"
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    with col2:
+        st.markdown('<div class="secondary-btn">', unsafe_allow_html=True)
+        if st.button("Find Clients"):
+            st.session_state.page = "clients"
+        st.markdown('</div>', unsafe_allow_html=True)
 
 # --------------------------------------------------
-# FOOTER (Optional, clean)
+# FIND MENTORS PAGE (STEP 4)
 # --------------------------------------------------
-st.markdown("<br><br>", unsafe_allow_html=True)
-st.markdown(
-    "<center style='color:#9CA3AF;'>Built by students • Powered by Huawei Cloud</center>",
-    unsafe_allow_html=True
-)
+elif st.session_state.page == "mentors":
+
+    st.markdown("## 🤝 Find a Mentor")
+    st.write("Connect with experienced women mentors near you.")
+
+    mentors = [
+        {
+            "name": "Nandi Mokoena",
+            "industry": "Agribusiness",
+            "location": "Soweto"
+        },
+        {
+            "name": "Thabo Khumalo",
+            "industry": "Retail",
+            "location": "Durban"
+        }
+    ]
+
+    for mentor in mentors:
+        st.markdown("<div class='card'>", unsafe_allow_html=True)
+        st.markdown(f"### {mentor['name']}")
+        st.write(f"**Industry:** {mentor['industry']}")
+        st.write(f"📍 {mentor['location']}")
+        if st.button(f"Request Session – {mentor['name']}"):
+            st.success("Session request sent!")
+            st.info("📩 SMS & Email notification will be sent via Huawei Cloud")
+        st.markdown("</div>", unsafe_allow_html=True)
+
+    if st.button("⬅ Back to Home"):
+        st.session_state.page = "home"
+
+# --------------------------------------------------
+# FIND CLIENTS PAGE (STEP 5)
+# --------------------------------------------------
+elif st.session_state.page == "clients":
+
+    st.markdown("## 🎯 Find Clients")
+    st.write("Discover local women-led businesses offering services.")
+
+    entrepreneurs = [
+        {
+            "name": "Lerato Foods",
+            "service": "Catering"
+        },
+        {
+            "name": "Sipho Repairs",
+            "service": "Phone & Laptop Repair"
+        }
+    ]
+
+    for biz in entrepreneurs:
+        st.markdown("<div class='card'>", unsafe_allow_html=True)
+        st.markdown(f"### {biz['name']}")
+        st.write(f"🛠 Service: {biz['service']}")
+        if st.button(f"Book Service – {biz['name']}"):
+            st.success("Booking confirmed!")
+            st.info("📩 Customer & entrepreneur notified via Huawei Cloud")
+        st.markdown("</div>", unsafe_allow_html=True)
+
+    if st.button("⬅ Back to Home"):
+        st.session_state.page = "home"
