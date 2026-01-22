@@ -51,6 +51,13 @@ elif menu == "Register":
 elif menu == "Find Mentors":
     st.subheader("Nearby Mentors")
 
+    # Convert mentors to DataFrame for map
+    df = pd.DataFrame(MENTORS)
+
+    st.map(df[['lat', 'lon']])
+
+    st.markdown("---")
+
     for mentor in MENTORS:
         with st.container():
             st.markdown(f"### 👤 {mentor['name']}")
@@ -59,7 +66,7 @@ elif menu == "Find Mentors":
 
             if st.button(f"Book session with {mentor['name']}", key=mentor["id"]):
                 st.success(f"Session request sent to {mentor['name']}")
-                st.info("📩 SMS & Email confirmation sent")
+                st.info("📩 Notification sent via Huawei Cloud SMS & Email")
 
 elif menu == "Training":
     st.subheader("Entrepreneur Training")
