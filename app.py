@@ -71,7 +71,7 @@ def require_login():
 # -----------------------------
 # APP HEADER
 # -----------------------------
-st.title("🚀 AscendX")
+st.title("AscendX")
 st.subheader("Youth & Women Enterprise Empowerment Platform")
 st.write("Built with Huawei Cloud Architecture")
 
