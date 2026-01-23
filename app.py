@@ -1,7 +1,12 @@
 import streamlit as st
 import pandas as pd
 
-
+# --------------------------------------------------
+# USER SESSION
+# --------------------------------------------------
+if "user" not in st.session_state:
+    st.session_state.user = None
+ 
 # --------------------------------------------------
 # PAGE CONFIG
 # --------------------------------------------------
@@ -109,12 +114,13 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # --------------------------------------------------
-# HEADER (OPTION 1A)
+# HEADER NAVIGATION (UPDATED)
 # --------------------------------------------------
 st.markdown("<div class='header'>", unsafe_allow_html=True)
 with st.container():
-    col1, col2 = st.columns([3, 4])
+    col1, col2, col3 = st.columns([3, 4, 3])
 
+    # LOGO
     with col1:
         st.markdown("""
         <div class="logo">
@@ -123,24 +129,41 @@ with st.container():
         </div>
         """, unsafe_allow_html=True)
 
+    # NAV LINKS
     with col2:
-        nav1, nav2, nav3 = st.columns(3)
+        n1, n2, n3 = st.columns(3)
 
-        with nav1:
+        with n1:
             if st.button("Home", key="nav_home"):
                 st.session_state.page = "home"
 
-        with nav2:
+        with n2:
             if st.button("Find Mentors", key="nav_mentors"):
                 st.session_state.page = "mentors"
 
-        with nav3:
+        with n3:
             if st.button("Find Clients", key="nav_clients"):
                 st.session_state.page = "clients"
 
-st.markdown("</div>", unsafe_allow_html=True)
+    # USER / AUTH AREA
+    with col3:
+        if st.session_state.user:
+            st.markdown(
+                f"👤 **{st.session_state.user['name']}**  \n"
+                f"<small>{st.session_state.user['role']}</small>",
+                unsafe_allow_html=True
+            )
 
-st.write("")  # spacing below header
+            if st.button("Sign Out"):
+                st.session_state.user = None
+                st.session_state.page = "home"
+
+        else:
+            if st.button("Sign In"):
+                st.session_state.page = "login"
+
+st.markdown("</div>", unsafe_allow_html=True)
+st.write("")  # spacing
 
 # --------------------------------------------------
 # HOME
@@ -172,10 +195,78 @@ if st.session_state.page == "home":
     with c2:
         if st.button("🎯 Find Clients"):
             st.session_state.page = "clients"
+# --------------------------------------------------
+# LOGIN
+# --------------------------------------------------
+elif st.session_state.page == "login":
+
+    st.markdown("## 🔐 Sign In")
+
+    name = st.text_input("Full Name")
+    role = st.selectbox("Select your role", [
+        "Entrepreneur",
+        "Mentor",
+        "Customer"
+    ])
+
+    if st.button("Continue"):
+        if name:
+            st.session_state.user = {
+                "name": name,
+                "role": role
+            }
+            st.session_state.page = "dashboard"
+            st.success(f"Welcome {name}!")
+        else:
+            st.error("Please enter your name")
+
+# --------------------------------------------------
+# DASHBOARD
+# --------------------------------------------------
+elif st.session_state.page == "dashboard":
+
+    if not st.session_state.user:
+        st.session_state.page = "login"
+        st.stop()
+
+    user = st.session_state.user
+
+    st.markdown(f"## 👋 Welcome, {user['name']}")
+    st.caption(f"Role: {user['role']}")
+
+    st.markdown("---")
+
+    if user["role"] == "Entrepreneur":
+        st.markdown("### 🚀 Entrepreneur Dashboard")
+        st.write("• Find mentors")
+        st.write("• Book mentorship sessions")
+        st.write("• Watch training content")
+
+        if st.button("Find Mentors"):
+            st.session_state.page = "mentors"
+
+    elif user["role"] == "Mentor":
+        st.markdown("### 🎓 Mentor Dashboard")
+        st.write("• Manage availability")
+        st.write("• Accept mentorship requests")
+
+        st.info("Mentor availability will be managed via Huawei FunctionGraph")
+
+    elif user["role"] == "Customer":
+        st.markdown("### 🛍 Customer Dashboard")
+        st.write("• Discover entrepreneurs")
+        st.write("• Book services")
+
+        if st.button("Find Clients"):
+            st.session_state.page = "clients"
 
 # --------------------------------------------------
 # FIND MENTORS
 # --------------------------------------------------
+if not st.session_state.user or st.session_state.user["role"] != "Entrepreneur":
+    st.warning("Only entrepreneurs can access mentors.")
+    st.stop()
+
 elif st.session_state.page == "mentors":
 
     st.markdown("## 🤝 Find a Mentor")
@@ -221,6 +312,10 @@ elif st.session_state.page == "mentors":
 # --------------------------------------------------
 # FIND CLIENTS
 # --------------------------------------------------
+if not st.session_state.user or st.session_state.user["role"] != "Customer":
+    st.warning("Only customers can access this page.")
+    st.stop()
+
 elif st.session_state.page == "clients":
 
     st.markdown("## 🎯 Find Clients")
