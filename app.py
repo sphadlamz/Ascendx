@@ -2,6 +2,85 @@ import streamlit as st
 
 st.markdown("""
 <style>
+/* Remove default Streamlit padding */
+.block-container {
+    padding-top: 2rem;
+}
+
+/* Hero wrapper */
+.hero-container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 80px 20px 60px 20px;
+}
+
+/* Pill */
+.hero-pill {
+    display: inline-block;
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: #f3e9ff;
+    color: #6f4aa6;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 28px;
+}
+
+/* Title */
+.hero-title {
+    font-size: 56px;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 28px;
+}
+
+.connect { color: #111827; }
+.mentor { color: #6f4aa6; }
+.grow { color: #f28c6b; }
+
+/* Subtitle */
+.hero-subtitle {
+    font-size: 18px;
+    color: #4b5563;
+    max-width: 720px;
+    margin: 0 auto 50px auto;
+    line-height: 1.6;
+}
+
+/* Buttons */
+.cta-wrapper {
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+.primary-btn button,
+.secondary-btn button {
+    width: 100%;
+    padding: 14px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 12px;
+}
+
+/* Primary */
+.primary-btn button {
+    background-color: #6f4aa6;
+    color: white;
+    border: none;
+}
+
+/* Secondary */
+.secondary-btn button {
+    background-color: transparent;
+    color: #f28c6b;
+    border: 2px solid #f28c6b;
+}
+</style>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+<style>
 .home-hero {
     min-height: 75vh;
     display: flex;
