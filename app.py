@@ -1,32 +1,27 @@
 import streamlit as st
-import pandas as pd
+
+st.set_page_config(page_title="AscendX", layout="wide")
 
 # --------------------------------------------------
-# PAGE CONFIG
+# SESSION STATE INIT
 # --------------------------------------------------
-st.set_page_config(
-    page_title="AscendX",
-    layout="wide"
-)
-
-# --------------------------------------------------
-# SESSION STATE
-# --------------------------------------------------
-if "user" not in st.session_state:
-    st.session_state.user = None
-
 if "page" not in st.session_state:
     st.session_state.page = "home"
 
+if "user" not in st.session_state:
+    st.session_state.user = None
+
+
 # --------------------------------------------------
-# URL PAGE HANDLING (HTML BUTTON NAV)
+# URL PAGE HANDLING
 # --------------------------------------------------
 query_params = st.query_params
 if "page" in query_params:
     st.session_state.page = query_params["page"]
 
+
 # --------------------------------------------------
-# CSS (GLOBAL STYLES)
+# GLOBAL CSS
 # --------------------------------------------------
 st.markdown("""
 <style>
@@ -40,14 +35,14 @@ html, body {
 }
 
 /* ================================
-   HEADER
+   HEADER BAR
 ================================ */
 .header {
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 999;
     background: white;
-    padding: 14px 28px;
+    padding: 12px 24px;
     border-bottom: 1px solid #e5e7eb;
 }
 
@@ -59,15 +54,15 @@ html, body {
     align-items: center;
     gap: 10px;
     font-size: 22px;
-    font-weight: 800;
+    font-weight: 700;
     color: #111827;
 }
 
 .logo-badge {
     background: #6B4C7A;
     color: white;
-    padding: 8px 12px;
-    border-radius: 12px;
+    padding: 6px 10px;
+    border-radius: 10px;
     font-size: 14px;
 }
 
@@ -80,6 +75,7 @@ html, body {
     justify-content: center;
 }
 
+/* Same style as Home CTA */
 .nav-html-btn {
     min-width: 160px;
     height: 48px;
@@ -96,6 +92,7 @@ html, body {
     transition: all 0.2s ease-in-out;
 }
 
+/* Hover */
 .nav-html-btn:hover {
     background: #6B4C7A;
     color: white;
@@ -120,67 +117,56 @@ html, body {
    HERO
 ================================ */
 .hero {
-    padding: 80px 40px;
+    padding: 80px 20px;
     text-align: center;
 }
 
-.hero-tag {
-    display: inline-block;
-    background: #f1e8f5;
-    color: #6B4C7A;
-    padding: 8px 16px;
-    border-radius: 999px;
-    font-weight: 600;
-    margin-bottom: 20px;
-}
-
 .hero h1 {
-    font-size: 64px;
+    font-size: 48px;
     font-weight: 800;
-    margin: 0;
 }
 
-.hero h1 span {
+.hero span {
     color: #6B4C7A;
 }
 
 .hero p {
-    max-width: 800px;
-    margin: 24px auto;
-    font-size: 18px;
-    color: #4b5563;
+    margin-top: 12px;
+    font-size: 17px;
+    color: #6b7280;
 }
 
 /* ================================
    CTA BUTTONS
 ================================ */
-.cta-bar {
-    margin-top: 40px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-.cta-primary {
-    background: #6B4C7A;
-    color: white;
-    border-radius: 14px;
-    padding: 14px 28px;
-    font-size: 16px;
+.cta-btn {
+    min-width: 220px;
+    height: 52px;
+    border-radius: 16px;
+    font-size: 15px;
     font-weight: 700;
     border: none;
     cursor: pointer;
 }
 
+.cta-primary {
+    background: #6B4C7A;
+    color: white;
+}
+
 .cta-outline {
     background: white;
-    color: #6B4C7A;
-    border-radius: 14px;
-    padding: 14px 28px;
-    font-size: 16px;
-    font-weight: 700;
     border: 1px solid #6B4C7A;
-    cursor: pointer;
+    color: #6B4C7A;
+}
+
+.cta-primary:hover {
+    background: #5a3e66;
+}
+
+.cta-outline:hover {
+    background: #6B4C7A;
+    color: white;
 }
 
 /* ================================
@@ -188,151 +174,144 @@ html, body {
 ================================ */
 .card {
     background: white;
-    border-radius: 18px;
-    padding: 22px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-    margin-bottom: 20px;
-}
-
-/* ================================
-   LOCATION CARD
-================================ */
-.location-card {
-    background: white;
     border-radius: 16px;
-    padding: 18px;
-    border: 1px solid #e5e7eb;
-    margin-bottom: 16px;
-    transition: all 0.2s ease-in-out;
+    padding: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
 }
 
-.location-card:hover {
-    border-color: #6B4C7A;
-    box-shadow: 0 10px 25px rgba(107, 76, 122, 0.15);
-}
-
-/* ================================
-   FOOTER SPACING
-================================ */
-.block-container {
-    padding-top: 1rem;
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 35px rgba(0,0,0,0.08);
 }
 
 </style>
 """, unsafe_allow_html=True)
 
-# --------------------------------------------------
-# MOCK DATA
-# --------------------------------------------------
-MENTORS = [
-    {"name": "Nandi Mokoena", "industry": "Agribusiness", "location": "Soweto", "lat": -26.2485, "lon": 27.8540},
-    {"name": "Thabo Khumalo", "industry": "Retail", "location": "Durban", "lat": -29.8587, "lon": 31.0218},
-]
-
-CLIENTS = [
-    {"name": "Lerato Foods", "service": "Catering", "lat": -26.2041, "lon": 28.0473},
-    {"name": "Sipho Repairs", "service": "Phone & Laptop Repair", "lat": -29.8587, "lon": 31.0218},
-]
 
 # --------------------------------------------------
-# HEADER
+# HEADER NAVIGATION
 # --------------------------------------------------
 st.markdown("<div class='header'>", unsafe_allow_html=True)
-col1, col2, col3 = st.columns([3, 6, 3])
+with st.container():
+    col1, col2, col3 = st.columns([3, 6, 3])
 
-# LOGO
-with col1:
-    st.markdown("""
-    <div class="logo">
-        <div class="logo-badge">✨</div>
-        AscendX
-    </div>
-    """, unsafe_allow_html=True)
-
-# NAV
-with col2:
-    st.markdown("""
-    <div class="nav-bar">
-        <button class="nav-html-btn" onclick="window.location.href='?page=home'">Home</button>
-        <button class="nav-html-btn" onclick="window.location.href='?page=mentors'">Find Mentors</button>
-        <button class="nav-html-btn" onclick="window.location.href='?page=clients'">Find Clients</button>
-        <button class="nav-html-btn" onclick="window.location.href='?page=login'">Sign In</button>
-    </div>
-    """, unsafe_allow_html=True)
-
-# USER INFO
-with col3:
-    if st.session_state.user:
-        st.markdown(f"""
-        <div class="user-info">
-            👤 <strong>{st.session_state.user['name']}</strong><br>
-            <span>{st.session_state.user['role']}</span>
+    # LOGO
+    with col1:
+        st.markdown("""
+        <div class="logo">
+            <div class="logo-badge">✨</div>
+            AscendX
         </div>
         """, unsafe_allow_html=True)
 
+    # NAV BUTTONS (HTML)
+    with col2:
+        st.markdown("""
+        <div class="nav-bar">
+            <button class="nav-html-btn" onclick="window.location.href='?page=home'">Home</button>
+            <button class="nav-html-btn" onclick="window.location.href='?page=mentors'">Find Mentors</button>
+            <button class="nav-html-btn" onclick="window.location.href='?page=clients'">Find Clients</button>
+            <button class="nav-html-btn" onclick="window.location.href='?page=login'">Sign In</button>
+        </div>
+        """, unsafe_allow_html=True)
+
+    # USER INFO
+    with col3:
+        if st.session_state.user:
+            st.markdown(
+                f"""
+                <div class="user-info">
+                    👤 <strong>{st.session_state.user['name']}</strong><br>
+                    <span>{st.session_state.user['role']}</span>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
 st.markdown("</div>", unsafe_allow_html=True)
+st.write("")
+
 
 # --------------------------------------------------
-# PAGES
+# PAGE: HOME
 # --------------------------------------------------
-
-# HOME
 if st.session_state.page == "home":
     st.markdown("""
     <div class="hero">
-        <div class="hero-tag">✨ Empowering Women in Business</div>
-        <h1>Connect. <span>Mentor.</span><br> Grow Together.</h1>
-        <p>
-            Find mentors who share your business interests, discover clients near you,
-            and build meaningful connections with fellow women entrepreneurs.
-        </p>
-
-        <div class="cta-bar">
-            <button class="cta-primary" onclick="window.location.href='?page=mentors'">Find a Mentor</button>
-            <button class="cta-outline" onclick="window.location.href='?page=clients'">Find Clients</button>
-        </div>
+        <h1>Connect. <span>Mentor.</span><br>Grow Together.</h1>
+        <p>Find mentors, connect with entrepreneurs, and grow women-led businesses.</p>
     </div>
     """, unsafe_allow_html=True)
 
-# LOGIN
+    c1, c2 = st.columns(2)
+    with c1:
+        if st.button("Find a Mentor"):
+            st.session_state.page = "mentors"
+
+    with c2:
+        if st.button("Find Clients"):
+            st.session_state.page = "clients"
+
+
+# --------------------------------------------------
+# PAGE: MENTORS
+# --------------------------------------------------
+elif st.session_state.page == "mentors":
+    st.subheader("🌍 Mentors Near You")
+
+    mentors = [
+        {"name": "Nomsa Dlamini", "skill": "Business Strategy"},
+        {"name": "Lerato Molefe", "skill": "Marketing"},
+        {"name": "Ayanda Khumalo", "skill": "Finance"}
+    ]
+
+    cols = st.columns(3)
+    for i, m in enumerate(mentors):
+        with cols[i]:
+            st.markdown(f"""
+            <div class="card">
+                <h4>{m['name']}</h4>
+                <p>{m['skill']}</p>
+                <button class="cta-btn cta-primary">Book Session</button>
+            </div>
+            """, unsafe_allow_html=True)
+
+
+# --------------------------------------------------
+# PAGE: CLIENTS
+# --------------------------------------------------
+elif st.session_state.page == "clients":
+    st.subheader("📍 Entrepreneurs Near You")
+
+    clients = [
+        {"name": "Thandi Beauty", "service": "Salon"},
+        {"name": "Zanele Catering", "service": "Food Services"},
+        {"name": "Mpho Fashion", "service": "Clothing"}
+    ]
+
+    cols = st.columns(3)
+    for i, c in enumerate(clients):
+        with cols[i]:
+            st.markdown(f"""
+            <div class="card">
+                <h4>{c['name']}</h4>
+                <p>{c['service']}</p>
+                <button class="cta-btn cta-outline">Book Service</button>
+            </div>
+            """, unsafe_allow_html=True)
+
+
+# --------------------------------------------------
+# PAGE: LOGIN
+# --------------------------------------------------
 elif st.session_state.page == "login":
-    st.subheader("Sign In")
+    st.subheader("🔐 Sign In")
+
     name = st.text_input("Full Name")
-    role = st.selectbox("Role", ["Entrepreneur", "Mentor", "Client"])
+    role = st.selectbox("Role", ["Entrepreneur", "Mentor", "Customer"])
 
     if st.button("Login"):
-        if name:
-            st.session_state.user = {"name": name, "role": role}
-            st.session_state.page = "home"
-            st.rerun()
-        else:
-            st.error("Please enter your name")
-
-# MENTORS
-elif st.session_state.page == "mentors":
-    st.subheader("Find Mentors")
-    df = pd.DataFrame(MENTORS)
-    st.map(df[['lat','lon']])
-
-    for m in MENTORS:
-        st.markdown(f"""
-        <div class="location-card">
-            <h4>{m['name']}</h4>
-            <p><strong>Industry:</strong> {m['industry']}</p>
-            <p><strong>Location:</strong> {m['location']}</p>
-        </div>
-        """, unsafe_allow_html=True)
-
-# CLIENTS
-elif st.session_state.page == "clients":
-    st.subheader("Find Clients")
-    df = pd.DataFrame(CLIENTS)
-    st.map(df[['lat','lon']])
-
-    for c in CLIENTS:
-        st.markdown(f"""
-        <div class="location-card">
-            <h4>{c['name']}</h4>
-            <p><strong>Service:</strong> {c['service']}</p>
-        </div>
-        """, unsafe_allow_html=True)
+        st.session_state.user = {"name": name, "role": role}
+        st.session_state.page = "home"
+        st.success("Logged in successfully!")
