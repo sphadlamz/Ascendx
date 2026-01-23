@@ -99,6 +99,10 @@ html, body {
     box-shadow: none;
 }
 
+.nav-btn {
+    display: flex;
+    justify-content: center;
+}
 
 /* ================================
    USER INFO
