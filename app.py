@@ -7,8 +7,6 @@ st.markdown("""
     padding-top: 2rem;
 }
 
-st.write("HTML rendering test")
-
 /* Hero wrapper */
 .hero-container {
     max-width: 900px;
