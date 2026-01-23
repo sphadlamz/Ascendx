@@ -21,99 +21,143 @@ st.set_page_config(
 if "page" not in st.session_state:
     st.session_state.page = "home"
 
-# --------------------------------------------------
-# BASE44-STYLE CSS
-# --------------------------------------------------
-st.markdown("""
-<style>
-/* Header */
+/* ================================
+   GLOBAL
+================================ */
+html, body {
+    background-color: #f7f7fb;
+    font-family: "Inter", sans-serif;
+}
+
+/* ================================
+   HEADER
+================================ */
 .header {
     position: sticky;
     top: 0;
-    z-index: 100;
-    background: rgba(255,255,255,0.85);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid #eee;
-    padding: 12px 0;
+    z-index: 1000;
+    background: white;
+    padding: 12px 24px;
+    border-bottom: 1px solid #e5e7eb;
 }
 
-.header-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
+/* ================================
+   LOGO
+================================ */
 .logo {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-weight: 800;
-    font-size: 20px;
+    font-size: 22px;
+    font-weight: 700;
+    color: #111827;
 }
 
 .logo-badge {
-    width: 36px;
-    height: 36px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #6B4C7A, #E8927C);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: #6B4C7A;
     color: white;
+    padding: 6px 10px;
+    border-radius: 10px;
+    font-size: 14px;
 }
 
+/* ================================
+   NAV BUTTONS (UNIFIED SIZE)
+================================ */
 .nav-btn button {
+    width: 130px;
+    height: 40px;
     background: transparent;
     border: none;
     font-size: 14px;
-    padding: 8px 14px;
+    font-weight: 500;
     border-radius: 10px;
     color: #4b5563;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
 }
 
 .nav-btn button:hover {
-    background: #f3f4f6;
-    color: #6B4C7A;
+    background: #6B4C7A;
+    color: white;
 }
 
-/* Hero */
-.hero-pill {
-    display: inline-block;
-    padding: 6px 14px;
-    border-radius: 999px;
-    background: #f1e9f6;
-    color: #6B4C7A;
+/* Remove Streamlit focus outline */
+.nav-btn button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* ================================
+   USER INFO
+================================ */
+.user-info {
+    text-align: right;
     font-size: 14px;
+    color: #111827;
 }
 
-.hero-title {
-    font-size: 56px;
-    font-weight: 800;
-    line-height: 1.1;
+.user-info span {
+    font-size: 12px;
+    color: #6b7280;
 }
 
-.hero-title .mentor { color: #6B4C7A; }
-.hero-title .grow { color: #E8927C; }
-
-.hero-sub {
-    font-size: 18px;
-    color: #4b5563;
-    max-width: 720px;
-    margin: 20px auto;
-}
-
-/* Cards */
+/* ================================
+   CARDS (Mentors / Clients)
+================================ */
 .card {
     background: white;
-    padding: 20px;
     border-radius: 16px;
-    border: 1px solid #e5e7eb;
-    margin-bottom: 16px;
+    padding: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 35px rgba(0,0,0,0.08);
+}
 
-</style>
-""", unsafe_allow_html=True)
+/* ================================
+   MAPKIT-STYLE LOCATION CARDS
+================================ */
+.location-card {
+    background: white;
+    border-radius: 14px;
+    padding: 16px;
+    border: 1px solid #e5e7eb;
+    transition: all 0.2s ease-in-out;
+}
+
+.location-card:hover {
+    border-color: #6B4C7A;
+    box-shadow: 0 10px 25px rgba(107, 76, 122, 0.15);
+}
+
+/* ================================
+   BUTTONS (PRIMARY)
+================================ */
+.primary-btn {
+    background: #6B4C7A;
+    color: white;
+    border-radius: 12px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.primary-btn:hover {
+    background: #5a3e66;
+}
+
+/* ================================
+   FOOTER SPACING FIX
+================================ */
+.block-container {
+    padding-top: 1rem;
+}
 
 # --------------------------------------------------
 # HEADER NAVIGATION (POLISHED)
