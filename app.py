@@ -184,6 +184,60 @@ html, body {
     transform: translateY(-4px);
     box-shadow: 0 16px 35px rgba(0,0,0,0.08);
 }
+/* ================================
+   HOME HERO (NEW)
+================================ */
+.home-hero {
+    min-height: 75vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(
+        circle at top,
+        rgba(243, 232, 255, 0.6),
+        rgba(255, 255, 255, 1) 60%
+    );
+}
+
+.home-hero-inner {
+    max-width: 900px;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.home-title {
+    font-size: 64px;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 20px;
+}
+
+.home-title .dark {
+    color: #111827;
+}
+
+.home-title .purple {
+    color: #6B4C7A;
+}
+
+.home-title .peach {
+    color: #F09A7A;
+}
+
+.home-subtitle {
+    font-size: 18px;
+    color: #6b7280;
+    max-width: 720px;
+    margin: 0 auto 40px auto;
+    line-height: 1.6;
+}
+
+.home-actions {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
 
 </style>
 """, unsafe_allow_html=True)
@@ -238,21 +292,35 @@ st.write("")
 # --------------------------------------------------
 if st.session_state.page == "home":
     st.markdown("""
-    <div class="hero">
-        <h1>Connect. <span>Mentor.</span><br>Grow Together.</h1>
-        <p>Find mentors, connect with entrepreneurs, and grow women-led businesses.</p>
+    <div class="home-hero">
+        <div class="home-hero-inner">
+
+            <h1 class="home-title">
+                <span class="dark">Connect.</span>
+                <span class="purple"> Mentor.</span><br>
+                <span class="peach">Grow Together.</span>
+            </h1>
+
+            <p class="home-subtitle">
+                Find mentors who share your business interests, discover clients near you,
+                and build meaningful connections with fellow women entrepreneurs.
+            </p>
+
+            <div class="home-actions">
+                <button class="cta-btn cta-primary"
+                    onclick="window.location.href='?page=mentors'">
+                    Find a Mentor
+                </button>
+
+                <button class="cta-btn cta-outline"
+                    onclick="window.location.href='?page=clients'">
+                    Find Clients
+                </button>
+            </div>
+
+        </div>
     </div>
     """, unsafe_allow_html=True)
-
-    c1, c2 = st.columns(2)
-    with c1:
-        if st.button("Find a Mentor"):
-            st.session_state.page = "mentors"
-
-    with c2:
-        if st.button("Find Clients"):
-            st.session_state.page = "clients"
-
 
 # --------------------------------------------------
 # PAGE: MENTORS
