@@ -111,22 +111,7 @@ st.markdown("""
     margin-bottom: 16px;
 }
 
-/* NAV BUTTONS */
-.nav-btn button {
-    width: 130px;
-    height: 40px;
-    background: transparent;
-    border: none;
-    font-size: 14px;
-    border-radius: 10px;
-    color: #4b5563;
-    transition: all 0.2s ease-in-out;
-}
 
-.nav-btn button:hover {
-    background: #6B4C7A;
-    color: white;
-}
 </style>
 """, unsafe_allow_html=True)
 
