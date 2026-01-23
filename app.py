@@ -1,5 +1,53 @@
 import streamlit as st
 
+st.markdown("""
+<style>
+.home-hero {
+    min-height: 75vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(
+        circle at top,
+        rgba(243, 232, 255, 0.6),
+        rgba(255, 255, 255, 1) 60%
+    );
+}
+
+.home-hero-inner {
+    max-width: 900px;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.home-title {
+    font-size: 64px;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 20px;
+}
+
+.home-title .dark { color: #111827; }
+.home-title .purple { color: #6B4C7A; }
+.home-title .peach { color: #F09A7A; }
+
+.home-subtitle {
+    font-size: 18px;
+    color: #6b7280;
+    max-width: 720px;
+    margin: 0 auto 40px auto;
+    line-height: 1.6;
+}
+
+.home-actions {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+}
+</style>
+""", unsafe_allow_html=True)
+
+
 st.set_page_config(page_title="AscendX", layout="wide")
 
 # --------------------------------------------------
