@@ -320,7 +320,7 @@ if st.session_state.page == "home":
 
         </div>
     </div>
-  
+   """, unsafe_allow_html=True)
 
 # --------------------------------------------------
 # PAGE: MENTORS
