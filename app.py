@@ -65,40 +65,46 @@ html, body {
 }
 
 /* ================================
-   NAV BUTTONS (UNIFIED SIZE)
+   NAV BUTTONS — STREAMLIT FIX
 ================================ */
-.nav-btn button {
-    min-width: 150px;          /* prevents wrapping */
+
+/* Target Streamlit button wrapper */
+.nav-btn div[data-testid="stButton"] > button {
+    min-width: 160px;
     height: 44px;
+
     background: transparent;
     border: none;
+    border-radius: 10px;
+
     font-size: 14px;
     font-weight: 500;
-    border-radius: 10px;
     color: #4b5563;
+
     cursor: pointer;
     transition: all 0.2s ease-in-out;
 
-    /* 🔥 alignment fixes */
-    white-space: nowrap;       /* no line breaks */
+    /* 🔥 alignment */
+    white-space: nowrap;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 16px;
+    padding: 0 18px;
 }
 
-/* Hover state */
-.nav-btn button:hover {
+/* Hover */
+.nav-btn div[data-testid="stButton"] > button:hover {
     background: #6B4C7A;
     color: white;
 }
 
-/* Remove Streamlit focus outline */
-.nav-btn button:focus {
+/* Focus cleanup */
+.nav-btn div[data-testid="stButton"] > button:focus {
     outline: none;
     box-shadow: none;
 }
 
+/* Container alignment */
 .nav-btn {
     display: flex;
     justify-content: center;
