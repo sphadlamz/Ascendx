@@ -1,4 +1,6 @@
 import streamlit as st
+import pandas as pd
+
 
 # --------------------------------------------------
 # PAGE CONFIG
@@ -179,30 +181,41 @@ elif st.session_state.page == "mentors":
     st.markdown("## 🤝 Find a Mentor")
 
     mentors = [
-            {
-        "name": "Nandi Mokoena",
-        "industry": "Agribusiness",
-        "location": "Soweto",
-        "lat": -26.2485,
-        "lon": 27.8540
-    },
-    {
-        "name": "Thabo Khumalo",
-        "industry": "Retail",
-        "location": "Durban",
-        "lat": -29.8587,
-        "lon": 31.0218
-    }
-]
+        {
+            "name": "Nandi Mokoena",
+            "industry": "Agribusiness",
+            "location": "Soweto",
+            "lat": -26.2485,
+            "lon": 27.8540
+        },
+        {
+            "name": "Thabo Khumalo",
+            "industry": "Retail",
+            "location": "Durban",
+            "lat": -29.8587,
+            "lon": 31.0218
+        }
+    ]
+
+    st.markdown("### 📍 Mentors Near You")
+    df = pd.DataFrame(mentors)
+    st.map(df[['lat', 'lon']])
 
     for m in mentors:
         st.markdown("<div class='card'>", unsafe_allow_html=True)
         st.markdown(f"### {m['name']}")
         st.write(f"Industry: {m['industry']}")
         st.write(f"📍 {m['location']}")
-        if st.button(f"Request session – {m['name']}"):
-            st.success("Session request sent")
-            st.info("📩 Notification via Huawei Cloud")
+
+        cols = st.columns([1, 1])
+        with cols[0]:
+            if st.button(f"📅 Request session", key=f"mentor_{m['name']}"):
+                st.success("Session request sent")
+                st.info("📩 SMS via Huawei Cloud")
+
+        with cols[1]:
+            st.caption("Location powered by Huawei MapKit")
+
         st.markdown("</div>", unsafe_allow_html=True)
 
 # --------------------------------------------------
@@ -213,15 +226,36 @@ elif st.session_state.page == "clients":
     st.markdown("## 🎯 Find Clients")
 
     businesses = [
-        {"name": "Lerato Foods", "service": "Catering"},
-        {"name": "Sipho Repairs", "service": "Phone & Laptop Repair"}
+        {
+            "name": "Lerato Foods",
+            "service": "Catering",
+            "location": "Johannesburg",
+            "lat": -26.2041,
+            "lon": 28.0473
+        },
+        {
+            "name": "Sipho Repairs",
+            "service": "Phone & Laptop Repair",
+            "location": "Durban",
+            "lat": -29.8587,
+            "lon": 31.0218
+        }
     ]
+
+    st.markdown("### 📍 Entrepreneurs Near You")
+    df = pd.DataFrame(businesses)
+    st.map(df[['lat', 'lon']])
 
     for b in businesses:
         st.markdown("<div class='card'>", unsafe_allow_html=True)
         st.markdown(f"### {b['name']}")
         st.write(f"Service: {b['service']}")
-        if st.button(f"Book service – {b['name']}"):
+        st.write(f"📍 {b['location']}")
+
+        if st.button(f"🛒 Book service", key=f"biz_{b['name']}"):
             st.success("Booking confirmed")
             st.info("📩 Huawei Cloud notification sent")
+
+        st.caption("Location powered by Huawei MapKit")
         st.markdown("</div>", unsafe_allow_html=True)
+
