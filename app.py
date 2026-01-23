@@ -21,7 +21,9 @@ st.set_page_config(
 # --------------------------------------------------
 if "page" not in st.session_state:
     st.session_state.page = "home"
-
+    
+st.markdown("""
+<style>
 /* ================================
    GLOBAL
 ================================ */
@@ -159,7 +161,8 @@ html, body {
 .block-container {
     padding-top: 1rem;
 }
-
+</style>
+""", unsafe_allow_html=True)
 # --------------------------------------------------
 # HEADER NAVIGATION (POLISHED)
 # --------------------------------------------------
