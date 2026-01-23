@@ -339,40 +339,109 @@ st.write("")
 # PAGE: HOME
 # --------------------------------------------------
 if st.session_state.page == "home":
-    st.markdown(
-        """
-        <div class="home-hero">
-            <div class="home-hero-inner">
 
-                <h1 class="home-title">
-                    <span class="dark">Connect.</span>
-                    <span class="purple"> Mentor.</span><br>
-                    <span class="peach">Grow Together.</span>
-                </h1>
+    st.markdown("<div style='text-align:center'>", unsafe_allow_html=True)
 
-                <p class="home-subtitle">
-                    Find mentors who share your business interests, discover clients near you,
-                    and build meaningful connections with fellow women entrepreneurs.
-                </p>
+    st.markdown("<div class='hero-pill'>✨ Empowering Women in Business</div>", unsafe_allow_html=True)
 
-                <div class="home-actions">
-                    <button class="cta-btn cta-primary"
-                        onclick="window.location.href='?page=mentors'">
-                        Find a Mentor
-                    </button>
+    st.markdown("""
+    <div class="hero-title">
+        <span class="connect">Connect.</span>
+        <span class="mentor"> Mentor.</span><br>
+        <span class="grow">Grow Together.</span>
+    </div>
+    """, unsafe_allow_html=True)
 
-                    <button class="cta-btn cta-outline"
-                        onclick="window.location.href='?page=clients'">
-                        Find Clients
-                    </button>
-                </div>
+    st.markdown("""
+    <p class="hero-subtitle">
+        Find mentors who share your business interests, discover clients near you,
+        and build meaningful connections with fellow women entrepreneurs.
+    </p>
+    """, unsafe_allow_html=True)
 
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    st.markdown("</div>", unsafe_allow_html=True)
 
+    st.write("")
+
+    # Buttons (STEP 2)
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.markdown('<div class="primary-btn">', unsafe_allow_html=True)
+        if st.button("Find a Mentor"):
+            st.session_state.page = "mentors"
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    with col2:
+        st.markdown('<div class="secondary-btn">', unsafe_allow_html=True)
+        if st.button("Find Clients"):
+            st.session_state.page = "clients"
+        st.markdown('</div>', unsafe_allow_html=True)
+
+# --------------------------------------------------
+# FIND MENTORS PAGE (STEP 4)
+# --------------------------------------------------
+elif st.session_state.page == "mentors":
+
+    st.markdown("## 🤝 Find a Mentor")
+    st.write("Connect with experienced women mentors near you.")
+
+    mentors = [
+        {
+            "name": "Nandi Mokoena",
+            "industry": "Agribusiness",
+            "location": "Soweto"
+        },
+        {
+            "name": "Thabo Khumalo",
+            "industry": "Retail",
+            "location": "Durban"
+        }
+    ]
+
+    for mentor in mentors:
+        st.markdown("<div class='card'>", unsafe_allow_html=True)
+        st.markdown(f"### {mentor['name']}")
+        st.write(f"**Industry:** {mentor['industry']}")
+        st.write(f"📍 {mentor['location']}")
+        if st.button(f"Request Session – {mentor['name']}"):
+            st.success("Session request sent!")
+            st.info("📩 SMS & Email notification will be sent via Huawei Cloud")
+        st.markdown("</div>", unsafe_allow_html=True)
+
+    if st.button("⬅ Back to Home"):
+        st.session_state.page = "home"
+
+# --------------------------------------------------
+# FIND CLIENTS PAGE (STEP 5)
+# --------------------------------------------------
+elif st.session_state.page == "clients":
+
+    st.markdown("## 🎯 Find Clients")
+    st.write("Discover local women-led businesses offering services.")
+
+    entrepreneurs = [
+        {
+            "name": "Lerato Foods",
+            "service": "Catering"
+        },
+        {
+            "name": "Sipho Repairs",
+            "service": "Phone & Laptop Repair"
+        }
+    ]
+
+    for biz in entrepreneurs:
+        st.markdown("<div class='card'>", unsafe_allow_html=True)
+        st.markdown(f"### {biz['name']}")
+        st.write(f"🛠 Service: {biz['service']}")
+        if st.button(f"Book Service – {biz['name']}"):
+            st.success("Booking confirmed!")
+            st.info("📩 Customer & entrepreneur notified via Huawei Cloud")
+        st.markdown("</div>", unsafe_allow_html=True)
+
+    if st.button("⬅ Back to Home"):
+        st.session_state.page = "home"
 # --------------------------------------------------
 # PAGE: MENTORS
 # --------------------------------------------------
