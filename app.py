@@ -339,36 +339,39 @@ st.write("")
 # PAGE: HOME
 # --------------------------------------------------
 if st.session_state.page == "home":
-    st.markdown("""
-    <div class="home-hero">
-        <div class="home-hero-inner">
+    st.markdown(
+        """
+        <div class="home-hero">
+            <div class="home-hero-inner">
 
-            <h1 class="home-title">
-                <span class="dark">Connect.</span>
-                <span class="purple"> Mentor.</span><br>
-                <span class="peach">Grow Together.</span>
-            </h1>
+                <h1 class="home-title">
+                    <span class="dark">Connect.</span>
+                    <span class="purple"> Mentor.</span><br>
+                    <span class="peach">Grow Together.</span>
+                </h1>
 
-            <p class="home-subtitle">
-                Find mentors who share your business interests, discover clients near you,
-                and build meaningful connections with fellow women entrepreneurs.
-            </p>
+                <p class="home-subtitle">
+                    Find mentors who share your business interests, discover clients near you,
+                    and build meaningful connections with fellow women entrepreneurs.
+                </p>
 
-            <div class="home-actions">
-                <button class="cta-btn cta-primary"
-                    onclick="window.location.href='?page=mentors'">
-                    Find a Mentor
-                </button>
+                <div class="home-actions">
+                    <button class="cta-btn cta-primary"
+                        onclick="window.location.href='?page=mentors'">
+                        Find a Mentor
+                    </button>
 
-                <button class="cta-btn cta-outline"
-                    onclick="window.location.href='?page=clients'">
-                    Find Clients
-                </button>
+                    <button class="cta-btn cta-outline"
+                        onclick="window.location.href='?page=clients'">
+                        Find Clients
+                    </button>
+                </div>
+
             </div>
-
         </div>
-    </div>
-   """, unsafe_allow_html=True)
+        """,
+        unsafe_allow_html=True
+    )
 
 # --------------------------------------------------
 # PAGE: MENTORS
