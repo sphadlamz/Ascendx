@@ -179,9 +179,21 @@ elif st.session_state.page == "mentors":
     st.markdown("## 🤝 Find a Mentor")
 
     mentors = [
-        {"name": "Nandi Mokoena", "industry": "Agribusiness", "location": "Soweto"},
-        {"name": "Thabo Khumalo", "industry": "Retail", "location": "Durban"}
-    ]
+            {
+        "name": "Nandi Mokoena",
+        "industry": "Agribusiness",
+        "location": "Soweto",
+        "lat": -26.2485,
+        "lon": 27.8540
+    },
+    {
+        "name": "Thabo Khumalo",
+        "industry": "Retail",
+        "location": "Durban",
+        "lat": -29.8587,
+        "lon": 31.0218
+    }
+]
 
     for m in mentors:
         st.markdown("<div class='card'>", unsafe_allow_html=True)
