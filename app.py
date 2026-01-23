@@ -418,7 +418,7 @@ st.write("")
 # --------------------------------------------------
 if st.session_state.page == "home":
 
-    st.markdown("""
+    st.html("""
     <div class="hero-container">
 
         <div class="hero-pill">
@@ -437,4 +437,4 @@ if st.session_state.page == "home":
         </p>
 
     </div>
-    """, unsafe_allow_html=True)
+    """)
