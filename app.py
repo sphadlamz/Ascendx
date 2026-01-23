@@ -338,32 +338,36 @@ st.write("")
 # --------------------------------------------------
 # PAGE: HOME
 # --------------------------------------------------
+# --------------------------------------------------
+# PAGE: HOME
+# --------------------------------------------------
 if st.session_state.page == "home":
 
-    st.markdown("<div style='text-align:center'>", unsafe_allow_html=True)
-
-    st.markdown("<div class='hero-pill'>✨ Empowering Women in Business</div>", unsafe_allow_html=True)
-
+    # -------- HERO SECTION --------
     st.markdown("""
-    <div class="hero-title">
-        <span class="connect">Connect.</span>
-        <span class="mentor"> Mentor.</span><br>
-        <span class="grow">Grow Together.</span>
+    <div style="text-align:center; padding-top:60px; padding-bottom:40px;">
+
+        <div class="hero-pill">
+            ✨ Empowering Women in Business
+        </div>
+
+        <div class="hero-title">
+            <span class="connect">Connect.</span>
+            <span class="mentor"> Mentor.</span><br>
+            <span class="grow">Grow Together.</span>
+        </div>
+
+        <p class="hero-subtitle">
+            Find mentors who share your business interests, discover clients near you,
+            and build meaningful connections with fellow women entrepreneurs.
+        </p>
+
     </div>
     """, unsafe_allow_html=True)
 
-    st.markdown("""
-    <p class="hero-subtitle">
-        Find mentors who share your business interests, discover clients near you,
-        and build meaningful connections with fellow women entrepreneurs.
-    </p>
-    """, unsafe_allow_html=True)
+    # -------- CTA BUTTONS --------
+    st.markdown("<div style='max-width:520px; margin:0 auto;'>", unsafe_allow_html=True)
 
-    st.markdown("</div>", unsafe_allow_html=True)
-
-    st.write("")
-
-    # Buttons (STEP 2)
     col1, col2 = st.columns(2)
 
     with col1:
@@ -378,128 +382,6 @@ if st.session_state.page == "home":
             st.session_state.page = "clients"
         st.markdown('</div>', unsafe_allow_html=True)
 
-# --------------------------------------------------
-# FIND MENTORS PAGE (STEP 4)
-# --------------------------------------------------
-elif st.session_state.page == "mentors":
+    st.markdown("</div>", unsafe_allow_html=True)
 
-    st.markdown("## 🤝 Find a Mentor")
-    st.write("Connect with experienced women mentors near you.")
-
-    mentors = [
-        {
-            "name": "Nandi Mokoena",
-            "industry": "Agribusiness",
-            "location": "Soweto"
-        },
-        {
-            "name": "Thabo Khumalo",
-            "industry": "Retail",
-            "location": "Durban"
-        }
-    ]
-
-    for mentor in mentors:
-        st.markdown("<div class='card'>", unsafe_allow_html=True)
-        st.markdown(f"### {mentor['name']}")
-        st.write(f"**Industry:** {mentor['industry']}")
-        st.write(f"📍 {mentor['location']}")
-        if st.button(f"Request Session – {mentor['name']}"):
-            st.success("Session request sent!")
-            st.info("📩 SMS & Email notification will be sent via Huawei Cloud")
-        st.markdown("</div>", unsafe_allow_html=True)
-
-    if st.button("⬅ Back to Home"):
-        st.session_state.page = "home"
-
-# --------------------------------------------------
-# FIND CLIENTS PAGE (STEP 5)
-# --------------------------------------------------
-elif st.session_state.page == "clients":
-
-    st.markdown("## 🎯 Find Clients")
-    st.write("Discover local women-led businesses offering services.")
-
-    entrepreneurs = [
-        {
-            "name": "Lerato Foods",
-            "service": "Catering"
-        },
-        {
-            "name": "Sipho Repairs",
-            "service": "Phone & Laptop Repair"
-        }
-    ]
-
-    for biz in entrepreneurs:
-        st.markdown("<div class='card'>", unsafe_allow_html=True)
-        st.markdown(f"### {biz['name']}")
-        st.write(f"🛠 Service: {biz['service']}")
-        if st.button(f"Book Service – {biz['name']}"):
-            st.success("Booking confirmed!")
-            st.info("📩 Customer & entrepreneur notified via Huawei Cloud")
-        st.markdown("</div>", unsafe_allow_html=True)
-
-    if st.button("⬅ Back to Home"):
-        st.session_state.page = "home"
-# --------------------------------------------------
-# PAGE: MENTORS
-# --------------------------------------------------
-elif st.session_state.page == "mentors":
-    st.subheader("🌍 Mentors Near You")
-
-    mentors = [
-        {"name": "Nomsa Dlamini", "skill": "Business Strategy"},
-        {"name": "Lerato Molefe", "skill": "Marketing"},
-        {"name": "Ayanda Khumalo", "skill": "Finance"}
-    ]
-
-    cols = st.columns(3)
-    for i, m in enumerate(mentors):
-        with cols[i]:
-            st.markdown(f"""
-            <div class="card">
-                <h4>{m['name']}</h4>
-                <p>{m['skill']}</p>
-                <button class="cta-btn cta-primary">Book Session</button>
-            </div>
-            """, unsafe_allow_html=True)
-
-
-# --------------------------------------------------
-# PAGE: CLIENTS
-# --------------------------------------------------
-elif st.session_state.page == "clients":
-    st.subheader("📍 Entrepreneurs Near You")
-
-    clients = [
-        {"name": "Thandi Beauty", "service": "Salon"},
-        {"name": "Zanele Catering", "service": "Food Services"},
-        {"name": "Mpho Fashion", "service": "Clothing"}
-    ]
-
-    cols = st.columns(3)
-    for i, c in enumerate(clients):
-        with cols[i]:
-            st.markdown(f"""
-            <div class="card">
-                <h4>{c['name']}</h4>
-                <p>{c['service']}</p>
-                <button class="cta-btn cta-outline">Book Service</button>
-            </div>
-            """, unsafe_allow_html=True)
-
-
-# --------------------------------------------------
-# PAGE: LOGIN
-# --------------------------------------------------
-elif st.session_state.page == "login":
-    st.subheader("🔐 Sign In")
-
-    name = st.text_input("Full Name")
-    role = st.selectbox("Role", ["Entrepreneur", "Mentor", "Customer"])
-
-    if st.button("Login"):
-        st.session_state.user = {"name": name, "role": role}
-        st.session_state.page = "home"
-        st.success("Logged in successfully!")
+    st.write("")  # spacing
