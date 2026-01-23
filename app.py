@@ -68,8 +68,8 @@ html, body {
    NAV BUTTONS (UNIFIED SIZE)
 ================================ */
 .nav-btn button {
-    width: 130px;
-    height: 40px;
+    min-width: 150px;          /* prevents wrapping */
+    height: 44px;
     background: transparent;
     border: none;
     font-size: 14px;
@@ -78,8 +78,16 @@ html, body {
     color: #4b5563;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
+
+    /* 🔥 alignment fixes */
+    white-space: nowrap;       /* no line breaks */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
 }
 
+/* Hover state */
 .nav-btn button:hover {
     background: #6B4C7A;
     color: white;
@@ -90,6 +98,7 @@ html, body {
     outline: none;
     box-shadow: none;
 }
+
 
 /* ================================
    USER INFO
