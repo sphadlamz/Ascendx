@@ -116,11 +116,11 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # --------------------------------------------------
-# HEADER NAVIGATION (UPDATED)
+# HEADER NAVIGATION (POLISHED)
 # --------------------------------------------------
 st.markdown("<div class='header'>", unsafe_allow_html=True)
 with st.container():
-    col1, col2, col3 = st.columns([3, 4, 3])
+    col1, col2, col3 = st.columns([3, 5, 4])
 
     # LOGO
     with col1:
@@ -131,41 +131,57 @@ with st.container():
         </div>
         """, unsafe_allow_html=True)
 
-    # NAV LINKS
+    # NAV BUTTONS (SAME SIZE)
     with col2:
-        n1, n2, n3 = st.columns(3)
+        b1, b2, b3, b4 = st.columns(4)
 
-        with n1:
+        with b1:
+            st.markdown("<div class='nav-btn'>", unsafe_allow_html=True)
             if st.button("Home", key="nav_home"):
                 st.session_state.page = "home"
+            st.markdown("</div>", unsafe_allow_html=True)
 
-        with n2:
+        with b2:
+            st.markdown("<div class='nav-btn'>", unsafe_allow_html=True)
             if st.button("Find Mentors", key="nav_mentors"):
                 st.session_state.page = "mentors"
+            st.markdown("</div>", unsafe_allow_html=True)
 
-        with n3:
+        with b3:
+            st.markdown("<div class='nav-btn'>", unsafe_allow_html=True)
             if st.button("Find Clients", key="nav_clients"):
                 st.session_state.page = "clients"
+            st.markdown("</div>", unsafe_allow_html=True)
 
-    # USER / AUTH AREA
+        with b4:
+            st.markdown("<div class='nav-btn'>", unsafe_allow_html=True)
+            if st.session_state.user:
+                if st.button("Sign Out", key="nav_logout"):
+                    st.session_state.user = None
+                    st.session_state.page = "home"
+            else:
+                if st.button("Sign In", key="nav_login"):
+                    st.session_state.page = "login"
+            st.markdown("</div>", unsafe_allow_html=True)
+
+    # USER INFO (AFTER BUTTONS)
     with col3:
         if st.session_state.user:
             st.markdown(
-                f"👤 **{st.session_state.user['name']}**  \n"
-                f"<small>{st.session_state.user['role']}</small>",
+                f"""
+                <div style="text-align:right; padding-top:6px;">
+                    👤 <strong>{st.session_state.user['name']}</strong><br>
+                    <span style="font-size:12px; color:#6b7280;">
+                        {st.session_state.user['role']}
+                    </span>
+                </div>
+                """,
                 unsafe_allow_html=True
             )
 
-            if st.button("Sign Out"):
-                st.session_state.user = None
-                st.session_state.page = "home"
-
-        else:
-            if st.button("Sign In"):
-                st.session_state.page = "login"
-
 st.markdown("</div>", unsafe_allow_html=True)
-st.write("")  # spacing
+st.write("")  # spacing below header
+
 
 # --------------------------------------------------
 # HOME
