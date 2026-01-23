@@ -334,18 +334,13 @@ with st.container():
 st.markdown("</div>", unsafe_allow_html=True)
 st.write("")
 
-
-# --------------------------------------------------
-# PAGE: HOME
-# --------------------------------------------------
 # --------------------------------------------------
 # PAGE: HOME
 # --------------------------------------------------
 if st.session_state.page == "home":
 
-    # -------- HERO SECTION --------
     st.markdown("""
-    <div style="text-align:center; padding-top:60px; padding-bottom:40px;">
+    <div class="hero-container">
 
         <div class="hero-pill">
             ✨ Empowering Women in Business
@@ -365,8 +360,8 @@ if st.session_state.page == "home":
     </div>
     """, unsafe_allow_html=True)
 
-    # -------- CTA BUTTONS --------
-    st.markdown("<div style='max-width:520px; margin:0 auto;'>", unsafe_allow_html=True)
+    # CTA buttons (centered + controlled width)
+    st.markdown('<div class="cta-wrapper">', unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
 
@@ -382,6 +377,4 @@ if st.session_state.page == "home":
             st.session_state.page = "clients"
         st.markdown('</div>', unsafe_allow_html=True)
 
-    st.markdown("</div>", unsafe_allow_html=True)
-
-    st.write("")  # spacing
+    st.markdown('</div>', unsafe_allow_html=True)
