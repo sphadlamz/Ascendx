@@ -143,9 +143,9 @@ if "user" not in st.session_state:
 # URL PAGE HANDLING
 # --------------------------------------------------
 query_params = st.query_params
-
 if "page" in query_params:
-    st.session_state.page = query_params["page"][0]
+    st.session_state.page = query_params["page"]
+
 
 # --------------------------------------------------
 # GLOBAL CSS
@@ -387,15 +387,15 @@ with st.container():
         """, unsafe_allow_html=True)
 
     # NAV BUTTONS (HTML)
-with col2:
-    components.html("""
-    <div class="nav-bar">
-        <button class="nav-html-btn" onclick="location.search='?page=home'">Home</button>
-        <button class="nav-html-btn" onclick="location.search='?page=mentors'">Find Mentors</button>
-        <button class="nav-html-btn" onclick="location.search='?page=clients'">Find Clients</button>
-        <button class="nav-html-btn" onclick="location.search='?page=login'">Sign In</button>
-    </div>
-    """, height=70)
+    with col2:
+        st.markdown("""
+        <div class="nav-bar">
+            <button class="nav-html-btn" onclick="window.location.href='?page=home'">Home</button>
+            <button class="nav-html-btn" onclick="window.location.href='?page=mentors'">Find Mentors</button>
+            <button class="nav-html-btn" onclick="window.location.href='?page=clients'">Find Clients</button>
+            <button class="nav-html-btn" onclick="window.location.href='?page=login'">Sign In</button>
+        </div>
+        """, unsafe_allow_html=True)
 
     # USER INFO
     with col3:
@@ -412,27 +412,6 @@ with col2:
 
 st.markdown("</div>", unsafe_allow_html=True)
 st.write("")
-
-# --------------------------------------------------
-# PAGE: MENTORS
-# --------------------------------------------------
-if st.session_state.page == "mentors":
-    st.markdown("## 👩‍🏫 Mentors")
-    st.info("Mentors page coming next.")
-
-# --------------------------------------------------
-# PAGE: CLIENTS
-# --------------------------------------------------
-if st.session_state.page == "clients":
-    st.markdown("## 🧑‍💼 Clients")
-    st.info("Clients page coming next.")
-
-# --------------------------------------------------
-# PAGE: LOGIN
-# --------------------------------------------------
-if st.session_state.page == "login":
-    st.markdown("## 🔐 Sign In")
-    st.info("Login flow will go here.")
 
 # --------------------------------------------------
 # PAGE: HOME
@@ -459,5 +438,3 @@ if st.session_state.page == "home":
 
     </div>
     """)
-
-
