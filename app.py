@@ -113,50 +113,38 @@ components.html("""
 """, height=80)
 
 # ---------------------------
-# Page Routing
+# HOME PAGE
 # ---------------------------
-if page == "home":
+# --- HOME PAGE ---
+if st.session_state.page == "home":
 
-    components.html("""
-    <div class="home-container">
+    st.markdown("""
+    <div class="hero-container">
 
-        <h1 class="home-title">
-            <span class="dark">Connect.</span>
-            <span class="purple"> Mentor.</span><br>
-            <span class="peach">Grow Together.</span>
-        </h1>
+        <div class="hero-pill">✨ Empowering Women in Business</div>
 
-        <p class="home-subtitle">
+        <div class="hero-title">
+            <span class="connect">Connect.</span>
+            <span class="mentor"> Mentor.</span><br>
+            <span class="grow">Grow Together.</span>
+        </div>
+
+        <p class="hero-subtitle">
             Find mentors who share your business interests, discover clients near you,
             and build meaningful connections with fellow women entrepreneurs.
         </p>
-
-        <div class="home-actions">
-            <button class="cta-btn cta-primary"
-                onclick="location.search='?page=mentors'">
-                Find a Mentor
-            </button>
-
-            <button class="cta-btn cta-outline"
-                onclick="location.search='?page=clients'">
-                Find Clients
-            </button>
-        </div>
-
     </div>
-    """, height=550)
+    """, unsafe_allow_html=True)
 
-elif page == "mentors":
-    st.title("Find Mentors")
-    st.write("Mentor discovery page content goes here.")
+    # BUTTONS (Streamlit-native)
+    col1, col2 = st.columns(2)
 
-elif page == "clients":
-    st.title("Find Clients")
-    st.write("Client discovery page content goes here.")
+    with col1:
+        if st.button("Find a Mentor", use_container_width=True):
+            st.session_state.page = "mentors"
+            st.rerun()
 
-elif page == "login":
-    st.title("Sign In")
-    st.write("Authentication page goes here.")
-
-else:
-    st.title("Page not found")
+    with col2:
+        if st.button("Find Clients", use_container_width=True):
+            st.session_state.page = "clients"
+            st.rerun()
