@@ -435,3 +435,47 @@ if st.session_state.page == "login":
     st.markdown("## 🔐 Sign In")
     st.info("Login flow will go here.")
 
+
+# --------------------------------------------------
+# PAGE: HOME
+# --------------------------------------------------
+if st.session_state.page == "home":
+
+    st.html("""
+    <div class="hero-container">
+
+        <div class="hero-pill">
+            ✨ Empowering Women in Business
+        </div>
+
+        <div class="hero-title">
+            <span class="connect">Connect.</span>
+            <span class="mentor"> Mentor.</span><br>
+            <span class="grow">Grow Together.</span>
+        </div>
+
+        <p class="hero-subtitle">
+            Find mentors who share your business interests, discover clients near you,
+            and build meaningful connections with fellow women entrepreneurs.
+        </p>
+
+        <div class="cta-wrapper">
+            <div class="primary-btn">
+                <button onclick="window.location.href='?page=mentors'">
+                    Find a Mentor
+                </button>
+            </div>
+
+            <div style="height:14px;"></div>
+
+            <div class="secondary-btn">
+                <button onclick="window.location.href='?page=clients'">
+                    Find Clients
+                </button>
+            </div>
+        </div>
+
+    </div>
+    """)
+
+
