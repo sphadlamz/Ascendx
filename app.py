@@ -436,5 +436,22 @@ if st.session_state.page == "home":
             and build meaningful connections with fellow women entrepreneurs.
         </p>
 
+        <div class="cta-wrapper">
+            <div class="primary-btn">
+                <button onclick="window.location.href='?page=mentors'">
+                    Find a Mentor
+                </button>
+            </div>
+
+            <div style="height:14px;"></div>
+
+            <div class="secondary-btn">
+                <button onclick="window.location.href='?page=clients'">
+                    Find Clients
+                </button>
+            </div>
+        </div>
+
     </div>
     """)
+
