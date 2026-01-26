@@ -438,41 +438,27 @@ if st.session_state.page == "login":
 # --------------------------------------------------
 # PAGE: HOME
 # --------------------------------------------------
-    components.html("""
-<div class="hero-container">
+if st.session_state.page == "home":
 
-    <div class="hero-pill">
-        ✨ Empowering Women in Business
-    </div>
+    st.html("""
+    <div class="hero-container">
 
-    <div class="hero-title">
-        <span class="connect">Connect.</span>
-        <span class="mentor"> Mentor.</span><br>
-        <span class="grow">Grow Together.</span>
-    </div>
-
-    <p class="hero-subtitle">
-        Find mentors who share your business interests, discover clients near you,
-        and build meaningful connections with fellow women entrepreneurs.
-    </p>
-
-    <div class="cta-wrapper">
-        <div class="primary-btn">
-            <button onclick="location.search='?page=mentors'">
-                Find a Mentor
-            </button>
+        <div class="hero-pill">
+            ✨ Empowering Women in Business
         </div>
 
-        <div style="height:14px;"></div>
-
-        <div class="secondary-btn">
-            <button onclick="location.search='?page=clients'">
-                Find Clients
-            </button>
+        <div class="hero-title">
+            <span class="connect">Connect.</span>
+            <span class="mentor"> Mentor.</span><br>
+            <span class="grow">Grow Together.</span>
         </div>
-    </div>
 
-</div>
-""", height=520)
+        <p class="hero-subtitle">
+            Find mentors who share your business interests, discover clients near you,
+            and build meaningful connections with fellow women entrepreneurs.
+        </p>
+
+    </div>
+    """)
 
 
