@@ -390,14 +390,14 @@ with st.container():
 
     # NAV BUTTONS (HTML)
     with col2:
-        st.markdown("""
-        <div class="nav-bar">
-            <button class="nav-html-btn" onclick="window.location.href='?page=home'">Home</button>
-            <button class="nav-html-btn" onclick="window.location.href='?page=mentors'">Find Mentors</button>
-            <button class="nav-html-btn" onclick="window.location.href='?page=clients'">Find Clients</button>
-            <button class="nav-html-btn" onclick="window.location.href='?page=login'">Sign In</button>
-        </div>
-        """, unsafe_allow_html=True)
+        components.html("""
+<div class="nav-bar">
+    <button class="nav-html-btn" onclick="location.search='?page=home'">Home</button>
+    <button class="nav-html-btn" onclick="location.search='?page=mentors'">Find Mentors</button>
+    <button class="nav-html-btn" onclick="location.search='?page=clients'">Find Clients</button>
+    <button class="nav-html-btn" onclick="location.search='?page=login'">Sign In</button>
+</div>
+""", height=70)
 
     # USER INFO
     with col3:
