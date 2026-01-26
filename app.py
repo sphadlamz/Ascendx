@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 
 st.markdown("""
 <style>
@@ -387,15 +388,15 @@ with st.container():
         """, unsafe_allow_html=True)
 
     # NAV BUTTONS (HTML)
-    with col2:
-        st.markdown("""
-        <div class="nav-bar">
-            <button class="nav-html-btn" onclick="window.location.href='?page=home'">Home</button>
-            <button class="nav-html-btn" onclick="window.location.href='?page=mentors'">Find Mentors</button>
-            <button class="nav-html-btn" onclick="window.location.href='?page=clients'">Find Clients</button>
-            <button class="nav-html-btn" onclick="window.location.href='?page=login'">Sign In</button>
-        </div>
-        """, unsafe_allow_html=True)
+with col2:
+    components.html("""
+    <div class="nav-bar">
+        <button class="nav-html-btn" onclick="location.search='?page=home'">Home</button>
+        <button class="nav-html-btn" onclick="location.search='?page=mentors'">Find Mentors</button>
+        <button class="nav-html-btn" onclick="location.search='?page=clients'">Find Clients</button>
+        <button class="nav-html-btn" onclick="location.search='?page=login'">Sign In</button>
+    </div>
+    """, height=70)
 
     # USER INFO
     with col3:
@@ -439,40 +440,41 @@ if st.session_state.page == "login":
 # --------------------------------------------------
 if st.session_state.page == "home":
 
-    st.html("""
-    <div class="hero-container">
+    components.html("""
+<div class="hero-container">
 
-        <div class="hero-pill">
-            ✨ Empowering Women in Business
-        </div>
-
-        <div class="hero-title">
-            <span class="connect">Connect.</span>
-            <span class="mentor"> Mentor.</span><br>
-            <span class="grow">Grow Together.</span>
-        </div>
-
-        <p class="hero-subtitle">
-            Find mentors who share your business interests, discover clients near you,
-            and build meaningful connections with fellow women entrepreneurs.
-        </p>
-
-        <div class="cta-wrapper">
-            <div class="primary-btn">
-                <button onclick="window.location.href='?page=mentors'">
-                    Find a Mentor
-                </button>
-            </div>
-
-            <div style="height:14px;"></div>
-
-            <div class="secondary-btn">
-                <button onclick="window.location.href='?page=clients'">
-                    Find Clients
-                </button>
-            </div>
-        </div>
-
+    <div class="hero-pill">
+        ✨ Empowering Women in Business
     </div>
-    """)
+
+    <div class="hero-title">
+        <span class="connect">Connect.</span>
+        <span class="mentor"> Mentor.</span><br>
+        <span class="grow">Grow Together.</span>
+    </div>
+
+    <p class="hero-subtitle">
+        Find mentors who share your business interests, discover clients near you,
+        and build meaningful connections with fellow women entrepreneurs.
+    </p>
+
+    <div class="cta-wrapper">
+        <div class="primary-btn">
+            <button onclick="location.search='?page=mentors'">
+                Find a Mentor
+            </button>
+        </div>
+
+        <div style="height:14px;"></div>
+
+        <div class="secondary-btn">
+            <button onclick="location.search='?page=clients'">
+                Find Clients
+            </button>
+        </div>
+    </div>
+
+</div>
+""", height=520)
+
 
