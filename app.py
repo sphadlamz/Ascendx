@@ -438,8 +438,6 @@ if st.session_state.page == "login":
 # --------------------------------------------------
 # PAGE: HOME
 # --------------------------------------------------
-if st.session_state.page == "home":
-
     components.html("""
 <div class="hero-container">
 
