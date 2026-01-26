@@ -414,6 +414,27 @@ st.markdown("</div>", unsafe_allow_html=True)
 st.write("")
 
 # --------------------------------------------------
+# PAGE: MENTORS
+# --------------------------------------------------
+if st.session_state.page == "mentors":
+    st.markdown("## 👩‍🏫 Mentors")
+    st.info("Mentors page coming next.")
+
+# --------------------------------------------------
+# PAGE: CLIENTS
+# --------------------------------------------------
+if st.session_state.page == "clients":
+    st.markdown("## 🧑‍💼 Clients")
+    st.info("Clients page coming next.")
+
+# --------------------------------------------------
+# PAGE: LOGIN
+# --------------------------------------------------
+if st.session_state.page == "login":
+    st.markdown("## 🔐 Sign In")
+    st.info("Login flow will go here.")
+
+# --------------------------------------------------
 # PAGE: HOME
 # --------------------------------------------------
 if st.session_state.page == "home":
