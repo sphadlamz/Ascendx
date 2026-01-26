@@ -413,6 +413,11 @@ with st.container():
 st.markdown("</div>", unsafe_allow_html=True)
 st.write("")
 
+
+# --------------------------------------------------
+# PAGE: HOME
+# --------------------------------------------------
+if st.session_state.page == "home":
 # --------------------------------------------------
 # PAGE: MENTORS
 # --------------------------------------------------
@@ -433,11 +438,6 @@ if st.session_state.page == "clients":
 if st.session_state.page == "login":
     st.markdown("## 🔐 Sign In")
     st.info("Login flow will go here.")
-
-# --------------------------------------------------
-# PAGE: HOME
-# --------------------------------------------------
-if st.session_state.page == "home":
 
     st.html("""
     <div class="hero-container">
