@@ -143,9 +143,9 @@ if "user" not in st.session_state:
 # URL PAGE HANDLING
 # --------------------------------------------------
 query_params = st.query_params
-if "page" in query_params:
-    st.session_state.page = query_params["page"]
 
+if "page" in query_params:
+    st.session_state.page = query_params["page"][0]
 
 # --------------------------------------------------
 # GLOBAL CSS
