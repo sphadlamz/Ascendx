@@ -1,3 +1,4 @@
+below is the running code. However, the buttons are still not functioning
 import streamlit as st
 
 st.markdown("""
@@ -143,9 +144,9 @@ if "user" not in st.session_state:
 # URL PAGE HANDLING
 # --------------------------------------------------
 query_params = st.query_params
-if "page" in query_params:
-    st.session_state.page = query_params["page"]
 
+if "page" in query_params:
+    st.session_state.page = query_params["page"][0]
 
 # --------------------------------------------------
 # GLOBAL CSS
@@ -414,6 +415,27 @@ st.markdown("</div>", unsafe_allow_html=True)
 st.write("")
 
 # --------------------------------------------------
+# PAGE: MENTORS
+# --------------------------------------------------
+if st.session_state.page == "mentors":
+    st.markdown("## 👩‍🏫 Mentors")
+    st.info("Mentors page coming next.")
+
+# --------------------------------------------------
+# PAGE: CLIENTS
+# --------------------------------------------------
+if st.session_state.page == "clients":
+    st.markdown("## 🧑‍💼 Clients")
+    st.info("Clients page coming next.")
+
+# --------------------------------------------------
+# PAGE: LOGIN
+# --------------------------------------------------
+if st.session_state.page == "login":
+    st.markdown("## 🔐 Sign In")
+    st.info("Login flow will go here.")
+
+# --------------------------------------------------
 # PAGE: HOME
 # --------------------------------------------------
 if st.session_state.page == "home":
@@ -435,6 +457,22 @@ if st.session_state.page == "home":
             Find mentors who share your business interests, discover clients near you,
             and build meaningful connections with fellow women entrepreneurs.
         </p>
+
+        <div class="cta-wrapper">
+            <div class="primary-btn">
+                <button onclick="window.location.href='?page=mentors'">
+                    Find a Mentor
+                </button>
+            </div>
+
+            <div style="height:14px;"></div>
+
+            <div class="secondary-btn">
+                <button onclick="window.location.href='?page=clients'">
+                    Find Clients
+                </button>
+            </div>
+        </div>
 
     </div>
     """)
