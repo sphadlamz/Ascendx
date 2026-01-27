@@ -369,11 +369,11 @@ html, body {
 </style>
 """, unsafe_allow_html=True)
 
-
 # --------------------------------------------------
 # HEADER NAVIGATION
 # --------------------------------------------------
 st.markdown("<div class='header'>", unsafe_allow_html=True)
+
 with st.container():
     col1, col2, col3 = st.columns([3, 6, 3])
 
@@ -386,16 +386,16 @@ with st.container():
         </div>
         """, unsafe_allow_html=True)
 
-    # NAV BUTTONS (HTML)
- with col2:
-    st.markdown("""
-    <div class="nav-bar">
-        <a class="nav-html-btn" href="?page=home">Home</a>
-        <a class="nav-html-btn" href="?page=mentors">Find Mentors</a>
-        <a class="nav-html-btn" href="?page=clients">Find Clients</a>
-        <a class="nav-html-btn" href="?page=login">Sign In</a>
-    </div>
-    """, unsafe_allow_html=True)
+    # NAV BUTTONS (WORKING)
+    with col2:
+        st.markdown("""
+        <div class="nav-bar">
+            <a class="nav-html-btn" href="?page=home">Home</a>
+            <a class="nav-html-btn" href="?page=mentors">Find Mentors</a>
+            <a class="nav-html-btn" href="?page=clients">Find Clients</a>
+            <a class="nav-html-btn" href="?page=login">Sign In</a>
+        </div>
+        """, unsafe_allow_html=True)
 
     # USER INFO
     with col3:
