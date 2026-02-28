@@ -394,6 +394,7 @@ with st.container():
             <a class="nav-html-btn" href="?page=mentors">Find Mentors</a>
             <a class="nav-html-btn" href="?page=clients">Find Clients</a>
             <a class="nav-html-btn" href="?page=login">Sign In</a>
+           <a class="nav-html-btn" href="?page=signup">Sign Up</a> 
         </div>
         """, unsafe_allow_html=True)
 
@@ -452,6 +453,35 @@ if st.session_state.page == "home":
         border-radius: 12px;
         cursor: pointer;
     }
+    # PAGE: SIGN UP
+# --------------------------------------------------
+
+{
+if st.session_state.page == "signup":
+    st.markdown("## 📝 Create an Account")
+
+    with st.form("signup_form"):
+        name = st.text_input("Full Name")
+        email = st.text_input("Email")
+        role = st.selectbox("I am a:", ["Mentor", "Client"])
+        password = st.text_input("Password", type="password")
+
+        submitted = st.form_submit_button("Create Account")
+
+        if submitted:
+            if name and email and password:
+                st.session_state.user = {
+                    "name": name,
+                    "email": email,
+                    "role": role
+                }
+
+                st.success("🎉 Account created successfully!")
+                st.session_state.page = "home"
+                st.rerun()
+            else:
+                st.error("Please fill in all fields.")
+                }
 
     .btn-primary {
         background-color: #6f4aa6;
